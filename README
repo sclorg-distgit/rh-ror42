@@ -1,0 +1,39 @@
+Package %{scl_name} provides Ruby on Rails web framework delivered as
+a Software Collection. For more information about Software Collections,
+see the scl(1) man page. By installing the %{scl_name} collection,
+you will get the minimum working set of packages to have a working
+Ruby on Rails framework.
+
+Usage: scl enable %{scl} 'ruby'
+
+Software Collections allow you to build and execute applications
+which are not located in the filesystem root hierarchy,
+but are stored in an alternative location, which is %{_scl_root}
+in case of the %{scl_name} collection.
+
+Ruby on Rails is a web application framework written in Ruby that includes
+everything needed to create database-backed web applications according to the
+Model-View-Controller (MVC) pattern.
+
+When you want to work with the %{scl_name} collection, use the scl
+utility (see the scl(1) man page for usage) to enable the scl
+environment.
+
+To enable Java Script support in your Ruby on Rails application, please use
+%{scl} collection in conjunction with node.js or alternatively therubyracer gem
+together with v8 collection.
+
+Examples:
+scl enable %{scl_name} 'command --arg'
+  Run a specific command with the argument --arg within %{scl_name}
+  software collections environment.
+
+scl enable %{scl_name} 'rails new APP_PATH'
+  The 'rails new' command creates a new Rails application with a default
+  directory structure and configuration at the path you specify by Ruby on
+  Rails generator from the %{scl_name} software collection.
+
+scl enable %{scl_name} bash
+  Run an interactive shell with the %{scl_name} software collection enabled.
+
+Report bugs to <http://bugzilla.redhat.com>.
