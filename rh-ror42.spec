@@ -23,7 +23,7 @@
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 Source0: README
 Source1: LICENSE
@@ -127,20 +127,13 @@ set -e
 # TODO: Is there a way how to leverage the enable scriptlet created above?
 GEM_PATH=%{gem_dir}:`ruby -e "print Gem.path.join(':')"` \
 X_SCLS=%{scl} \
-#ruby -rfileutils << \EOR
 ruby -rfileutils > rubygems_filesystem.list << \EOR
   # Create RubyGems filesystem.
   Gem.ensure_gem_subdirectories '%{buildroot}%{gem_dir}'
-  # TODO: this fails (default_ext_dir_for returns nil)
-  #FileUtils.mkdir_p File.join '%{buildroot}', Gem.default_ext_dir_for('%{gem_dir}')
+  FileUtils.mkdir_p File.join '%{buildroot}', Gem.default_ext_dir_for('%{gem_dir}')
 
   # Output the relevant directories.
-  # TODO: this fails (default_dirs has no :rh-ror42_system)
-  #Gem.default_dirs['%{scl}_system'.to_sym].each { |k, p| puts p }
-  Gem.default_dirs['system'.to_sym].values.each do |x|
-    puts x.sub!('/%{scl_ruby}/', '/%{scl}/')
-    FileUtils.mkdir_p File.join '%{buildroot}', x
-  end
+  puts Gem.default_dirs['%{scl}_system'.to_sym].values
 EOR
 EOF
 
@@ -162,5 +155,8 @@ EOF
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Sat Feb 20 2016 Pavel Valena <pvalena@redhat.com> - 2.2-2
+- Fix path generation in Fake SCL environment
+
 * Thu Dec 17 2015 Pavel Valena <pvalena@redhat.com> - 2.2-1
 - Initial metapackage.
