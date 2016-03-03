@@ -9,6 +9,11 @@
 %{!?scl_ruby:%global scl_ruby rh-ruby23}
 %{!?scl_prefix_ruby:%global scl_prefix_ruby %{scl_ruby}-}
 
+# Fallback to rh-nodejs4 rh-nodejs4-scldevel is probably not available in
+# the buildroot.
+%{!?scl_nodejs:%global scl_nodejs rh-nodejs4}
+%{!?scl_prefix_nodejs:%global scl_prefix_nodejs %{scl_nodejs}-}
+
 # Do not produce empty debuginfo package.
 %global debug_package %{nil}
 
@@ -23,12 +28,11 @@
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv2+
 Source0: README
 Source1: LICENSE
-# TODO: remove if not needed
-#Requires: v8314-scldevel
+
 %if 0%{?install_scl}
 Requires: %{scl_prefix}rubygem-therubyracer
 Requires: %{scl_prefix}rubygem-sqlite3
@@ -65,6 +69,7 @@ Summary: Package shipping basic build configuration
 Requires: scl-utils-build
 Requires: %{scl_runtime}
 Requires: %{scl_prefix_ruby}scldevel
+Requires: %{scl_prefix_nodejs}scldevel
 
 %description build
 Package shipping essential configuration macros to build %scl Software Collection.
@@ -155,6 +160,9 @@ EOF
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Feb 25 2016 Pavel Valena <pvalena@redhat.com> - 2.2-3
+- Add rh-nodejs4-scldevel to the Requires of build subpackage
+
 * Sat Feb 20 2016 Pavel Valena <pvalena@redhat.com> - 2.2-2
 - Fix path generation in Fake SCL environment
 
