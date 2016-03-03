@@ -27,13 +27,12 @@
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: GPLv2+
 Source0: README
 Source1: LICENSE
 
 %if 0%{?install_scl}
-Requires: %{scl_prefix}rubygem-therubyracer
 Requires: %{scl_prefix}rubygem-sqlite3
 Requires: %{scl_prefix}rubygem-rails
 Requires: %{scl_prefix}rubygem-sass-rails
@@ -45,6 +44,7 @@ Requires: %{scl_prefix}rubygem-bcrypt
 Requires: %{scl_prefix}rubygem-uglifier
 Requires: %{scl_prefix}rubygem-jbuilder
 Requires: %{scl_prefix}rubygem-spring
+Requires: %{scl_prefix_nodejs}nodejs
 %endif
 BuildRequires: help2man
 BuildRequires: scl-utils-build
@@ -159,6 +159,9 @@ EOF
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Mar 03 2016 Pavel Valena <pvalena@redhat.com> - 2.2-5
+- Add nodejs to Requires
+
 * Thu Mar 03 2016 Pavel Valena <pvalena@redhat.com> - 2.2-4
 - Enable install_scl
 
