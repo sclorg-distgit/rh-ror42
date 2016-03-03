@@ -27,7 +27,7 @@
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: GPLv2+
 Source0: README
 Source1: LICENSE
@@ -44,6 +44,7 @@ Requires: %{scl_prefix}rubygem-bcrypt
 Requires: %{scl_prefix}rubygem-uglifier
 Requires: %{scl_prefix}rubygem-jbuilder
 Requires: %{scl_prefix}rubygem-spring
+Requires: %{scl_prefix}rubygem-byebug
 Requires: %{scl_prefix_nodejs}nodejs
 %endif
 BuildRequires: help2man
@@ -159,6 +160,9 @@ EOF
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Mar 03 2016 Pavel Valena <pvalena@redhat.com> - 2.2-6
+- Add rubygem-byebug to Requires
+
 * Thu Mar 03 2016 Pavel Valena <pvalena@redhat.com> - 2.2-5
 - Add nodejs to Requires
 
