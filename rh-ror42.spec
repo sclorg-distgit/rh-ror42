@@ -20,15 +20,14 @@
 # Support SCL over NFS.
 %global nfsmountable 1
 
-# TODO: enable install_scl
-%{!?install_scl: %global install_scl 0}
+%{!?install_scl: %global install_scl 1}
 
 %scl_package %scl
 
 Summary: Package that installs %scl
 Name: %scl_name
 Version: 2.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2+
 Source0: README
 Source1: LICENSE
@@ -160,6 +159,9 @@ EOF
 %{_root_sysconfdir}/rpm/macros.%{scl_name_base}-scldevel
 
 %changelog
+* Thu Mar 03 2016 Pavel Valena <pvalena@redhat.com> - 2.2-4
+- Enable install_scl
+
 * Thu Feb 25 2016 Pavel Valena <pvalena@redhat.com> - 2.2-3
 - Add rh-nodejs4-scldevel to the Requires of build subpackage
 
